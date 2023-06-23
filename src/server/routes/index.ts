@@ -6,7 +6,7 @@ const router = Router();
 router.get("/", (req, res) => {
     return res.send("funcionou agora!");
 })
-router.post("/cidades", CidadesController.Create);
+router.post("/cidades", CidadesController.createValidation,CidadesController.Create);
 
 
 export {router};
