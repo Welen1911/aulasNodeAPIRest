@@ -14,11 +14,16 @@ export const getIdValidation = validation((getSchema) => ({
 
 
 export const getId = async (req: Request<IParamProps>, res: Response) => {
-    console.log(req.params);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(`Create ainda não foi implementado!<br>
-    <form>
-        Params: <input type='number' placeholder=${req.params.id}/>
-    </form>
-    `);
+   if (Number(req.params.id) === 999999) return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    errors: {
+        default: "Registro não encontrado"
+    }
+   })
+
+   return res.status(StatusCodes.OK).json({
+    id: req.params.id,
+    nome: "Passa e Fica",
+    estado: "RN"
+   })
 
 }

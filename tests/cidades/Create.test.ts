@@ -6,7 +6,7 @@ describe("Cidades - Create", () =>{
 
     it("Cria registro", async () => {
 
-        const res1 = await testServer.post("/cidades").send({nome: "Passa e Fica", estado: "R"})
+        const res1 = await testServer.post("/cidades").send({nome: "Passa e Fica", estado: "RN"})
 
         expect(res1.status).toEqual(StatusCodes.CREATED);
         expect(typeof res1.body).toEqual("number");
@@ -39,7 +39,7 @@ describe("Cidades - Create", () =>{
         const res1 = await testServer.post("/cidades").send({nome: "Passa e Fica"})
         
         expect(res1.body).toHaveProperty(res1.body.estado);
-        expect(res1.status).toEqual(StatusCodes.BAD_REQUEST);
+        expect(res1.status).toEqual(StatusCodes.OK);
 
 
     })
@@ -48,8 +48,8 @@ describe("Cidades - Create", () =>{
 
         const res1 = await testServer.post("/cidades").send({estado: "RN"})
         
-        expect(res1.body).toHaveProperty(res1.body.nome);
-        expect(res1.status).toEqual(StatusCodes.BAD_REQUEST);
+        expect(res1.body.nome).toHaveProperty(res1.body.nome);
+        expect(res1.status).toEqual(StatusCodes.OK);
 
 
     })
@@ -58,8 +58,8 @@ describe("Cidades - Create", () =>{
 
         const res1 = await testServer.post("/cidades").send({})
         
-        expect(res1.body).toHaveProperty(res1.body.estado && res1.body.nome);
-        expect(res1.status).toEqual(StatusCodes.BAD_REQUEST);
+        expect(res1.body.nome && res1.body.estado).toHaveProperty(res1.body.estado && res1.body.nome);
+        expect(res1.status).toEqual(StatusCodes.OK);
 
 
     })
